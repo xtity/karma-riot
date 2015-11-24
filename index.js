@@ -22,7 +22,9 @@ function createRiotPreprocessor(args, config, logger, helper) {
     try {
       result = riot.compile(content, options)
     } catch (e) {
-      log.error('%s\n  at %s:%d', e.message, file.originalPath, e.location.first_line)
+      if (!e) {
+        log.error('%s\n  at %s:%d', e.message, file.originalPath, e.location.first_line)
+	  }
       return done(e, null)
     }
     done(null, result)
